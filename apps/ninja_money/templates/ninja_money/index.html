@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ninja Gold</title>
+     {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'ninja_money/css/styles.css' %}" media="screen" title="no title" charset="utf-8">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class=“container”>
+        
+    <div class="notblock">
+        <h2>Your gold:</h2>
+        <form action="/process_money" method="post">
+             {% csrf_token %}
+            <p>{{request.session.gold}}</p>
+        </form>
+    </div>
+
+
+    <div class="block">
+        <h3>Farm</h3>
+        <form action="/process_money" method="post">
+             {% csrf_token %}
+            <input type="hidden" name="building" value="farm" />
+            <input type="submit" value="Find Gold!" />
+
+        </form>
+    </div>
+
+    <div class="block">
+        <h3>Cave</h3>
+        <form action="/process_money" method="post">
+             {% csrf_token %}
+            <input type="hidden" name="building" value="cave" />
+            <input type="submit" value="Find Gold!" />
+
+        </form>
+    </div>
+
+    <div class="block">
+        <h3>House</h3>
+        <form action="/process_money" method="post">
+             {% csrf_token %}
+            <input type="hidden" name="building" value="house" />
+            <input type="submit" value="Find Gold!" />
+
+        </form>
+    </div>
+
+    <div class="block">
+        <h3>Casino</h3>
+        <form action="/process_money" method="post">
+             {% csrf_token %}
+            <input type="hidden" name="building" value="casino" />
+            <input type="submit" value="Find Gold!" />
+        </form>
+    </div>
+    <h2>Activities</h2>
+    <div id="activity" action="/process_money">
+         {% for i in request.session.message %}
+        <p>{{i}}</p>
+        {% endfor %}
+
+    </div>
+    <form action="/reset" method="post">
+         {% csrf_token %}
+        <input type="submit" value="Reset" />
+    </form>
+    
+    </div>
+</body>
+
+</html>
